@@ -3,6 +3,7 @@ phases:
   install:
     commands:
       - npm install time
+      - npm install
       - node run_zip
       - aws s3 cp federation.zip s3://sgas.sam/aws-services-federation
       - aws cloudformation package
