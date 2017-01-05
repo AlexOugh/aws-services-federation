@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: API interfaces and corresponding lambda functions for awsconfig.
+Description: Lambda function for account federation using IAM roles.
 Resources:
   LambdaFunctionIAMRole:
       Type: "AWS::IAM::Role"
