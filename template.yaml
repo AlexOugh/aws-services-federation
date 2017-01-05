@@ -41,6 +41,6 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs4.3
-      CodeUri: s3://sgas.sam/aws-services-federation/federation.zip
+      CodeUri: s3://sgas.sam.aws-services-federation/federation.zip
       Role: !GetAtt LambdaFunctionIAMRole.Arn
       Timeout: 60
