@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 vfs = require('vinyl-fs'),
 zip = require('gulp-zip');
 
-vfs.src(['index.js'],{cwd:'.', base:'.'})
+vfs.src(['index.js'])
 .pipe(zip('federation.zip'))
 .pipe(gulp.dest('.'))
 .on('end', function(err, data) {

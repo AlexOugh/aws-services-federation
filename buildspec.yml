@@ -6,6 +6,7 @@ phases:
       - npm install
       - node run_zip
       - aws s3 cp federation.zip s3://sgas.sam.aws-services-federation
+      - aws s3 cp swagger.yaml s3://sgas.sam.aws-services-federation
       - aws cloudformation package
          --template-file template.yaml
          --s3-bucket sgas.sam.aws-services-federation

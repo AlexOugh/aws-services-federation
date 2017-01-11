@@ -12,7 +12,10 @@ const createResponse = (statusCode, body) => {
 exports.handler = (event, context, callback) => {
   assumeRole(null, 0, event.roles, event.sessionName, event.durationSeconds, function(err, data) {
     if (err)  callback(null, createResponse(500, err));
-    else callback(null, createResponse(200, data));
+    else {
+      if (event.region) data['region'] = event.region;
+      callback(null, createResponse(200, data));
+    }
   });
 }
 
@@ -37,12 +40,13 @@ const assumeRole = (creds, idx, roles, sessionName, durationSeconds, callback) =
       //console.log(data);
       if (++idx == roles.length) {
         console.log("successfully completed to assume all roles");
-        creds = new AWS.Credentials({
+        /*creds = new AWS.Credentials({
           accessKeyId: data.Credentials.AccessKeyId,
           secretAccessKey: data.Credentials.SecretAccessKey,
           sessionToken: data.Credentials.SessionToken
         });
-        callback(null, creds);
+        callback(null, creds);*/
+        callback(null, data);
       }
       else {
         creds = new AWS.Credentials({
