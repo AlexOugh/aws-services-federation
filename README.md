@@ -1,5 +1,5 @@
 
-# AWSConfig
+# Account Federation
 
 API Gateway and Lambda functions to manage AWS Account Federation
 
