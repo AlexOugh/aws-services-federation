@@ -43,11 +43,7 @@ Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
-      DefinitionUri: !Join
-        - ''
-        - - s3://
-          - !Ref S3BucketForDeployment
-          - '/swagger.yaml'
+      DefinitionUri: s3://sgas.sam.aws-services-federation/swagger.yaml
       StageName: Prod
       Variables:
         LambdaFunctionName: !Ref LambdaFunction
@@ -57,11 +53,7 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs4.3
-      CodeUri: !Join
-        - ''
-        - - s3://
-          - !Ref S3BucketForDeployment
-          - '/federation.zip'
+      CodeUri: s3://sgas.sam.aws-services-federation/federation.zip
       Role: !GetAtt LambdaFunctionIAMRole.Arn
       Timeout: 60
       Events:
