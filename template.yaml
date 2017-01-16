@@ -42,6 +42,8 @@ Resources:
       DefinitionUri: s3://sgas.sam.aws-services-federation/swagger.yaml
       StageName: Prod
       Variables:
+        AWSAccountId: !Ref AWS::AccountId
+        AWSRegion: !Ref AWS::Region
         LambdaFunctionName: !Ref LambdaFunction
 
   LambdaFunction:

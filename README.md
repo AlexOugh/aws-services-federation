@@ -5,7 +5,7 @@ API Gateway and Lambda Function to manage AWS Account Federation
 
 ![aws-services][aws-services-image]
 
-## How to Run
+## How to Run API Gateway Interface
 
 path
 ```
@@ -28,7 +28,7 @@ return
     ./docs/pipeline.json
 
 
-## How To Test Lambda Functions
+## How To Test Lambda Function
 
     $ node test.js
 

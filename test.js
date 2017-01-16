@@ -1,9 +1,9 @@
 
-var federateAccount = '089476987273';
-var federateRoleName = 'federate';
-var roleName = 'sgas_dev_admin';
-var account = '290093585298';
-var roleExternalId = 'ccb6cfce-057c-4fbc-84b9-1ee10e8b6560';
+var federateAccount = '<federate_account_num>';
+var federateRoleName = '<federate_role_name>';
+var roleName = '<target_account_role_name>';
+var account = '<target_account_num>';
+var roleExternalId = '<externl_id_of_target_account_to_federate>';
 
 var roles = [];
 roles.push({roleArn: 'arn:aws:iam::' + federateAccount + ':role/' + federateRoleName});
@@ -12,7 +12,7 @@ console.log(roles);
 
 event = {
   roles: roles,
-  sessionName: "session1",
+  sessionName: "dummy_session_name",
   durationSeconds: 0
 }
 

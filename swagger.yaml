@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "2017-01-11T15:26:54Z"
-  title: "API Gateway for Account Federation"
+  title: "Account Federation Interface"
 schemes:
 - "https"
 paths:
@@ -67,8 +67,6 @@ paths:
               type: "string"
             Access-Control-Allow-Headers:
               type: "string"
-      security:
-      - SSOAuthorizer: []
       x-amazon-apigateway-integration:
         responses:
           default:
@@ -88,7 +86,7 @@ paths:
             },\n    {\"roleArn\": \"arn:aws:iam::$input.params('account'):role/$input.params('roleName')\"\
             , \"externalId\": \"$input.params().header.get('roleExternalId')\"}\n\
             \  ],\n  \"sessionName\":\"session1\",\n  \"durationSeconds\":0\n}"
-        uri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:089476987273:function:${stageVariables.LambdaFunctionName}/invocations"
+        uri: "arn:aws:apigateway:${stageVariables.AWSRegion}:lambda:path/2015-03-31/functions/arn:aws:lambda:${stageVariables.AWSRegion}:${stageVariables.AWSAccountId}:function:${stageVariables.LambdaFunctionName}/invocations"
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
@@ -156,16 +154,6 @@ paths:
           application/json: "{\"statusCode\": 200}"
         passthroughBehavior: "when_no_match"
         type: "mock"
-securityDefinitions:
-  SSOAuthorizer:
-    type: "apiKey"
-    name: "Authorization"
-    in: "header"
-    x-amazon-apigateway-authtype: "custom"
-    x-amazon-apigateway-authorizer:
-      authorizerResultTtlInSeconds: 300
-      authorizerUri: "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:089476987273:function:aws-services-authorizer-LambdaFunction-CVP9JG7AO56C/invocations"
-      type: "token"
 definitions:
   Empty:
     type: "object"
