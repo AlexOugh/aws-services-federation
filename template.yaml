@@ -1,10 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: API Gateway and Lambda function for account federation using IAM roles.
-Parameters:
-  S3BucketForDeployment:
-    Type: String
-    Description: S3 bucket name where the deployment files are located
 Resources:
   LambdaFunctionIAMRole:
       Type: "AWS::IAM::Role"
