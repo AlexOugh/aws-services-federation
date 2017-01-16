@@ -1,6 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: API Gateway and Lambda function for account federation using IAM roles.
+Parameters:
+  S3BucketForDeployment:
+    Type: String
+    Description: S3 bucket name where the deployment files are located
 Resources:
   LambdaFunctionIAMRole:
       Type: "AWS::IAM::Role"
@@ -39,11 +43,13 @@ Resources:
   ApiGatewayApi:
     Type: AWS::Serverless::Api
     Properties:
-      DefinitionUri: s3://sgas.sam.aws-services-federation/swagger.yaml
+      DefinitionUri: !Join
+        - ''
+        - - s3://
+          - !Ref S3BucketForDeployment
+          - '/swagger.yaml'
       StageName: Prod
       Variables:
-        AWSAccountId: !Ref AWS::AccountId
-        AWSRegion: !Ref AWS::Region
         LambdaFunctionName: !Ref LambdaFunction
 
   LambdaFunction:
@@ -51,7 +57,11 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs4.3
-      CodeUri: s3://sgas.sam.aws-services-federation/federation.zip
+      CodeUri: !Join
+        - ''
+        - - s3://
+          - !Ref S3BucketForDeployment
+          - '/federation.zip'
       Role: !GetAtt LambdaFunctionIAMRole.Arn
       Timeout: 60
       Events:
